@@ -37,7 +37,6 @@
 <script>
     import axios from 'axios'
     const http = axios.create({
-        baseURL: 'http://localhost:8000',
         withCredentials: true
     })
 
@@ -68,7 +67,7 @@
             getuser () {
                 http.get('/sanctum/csrf-cookie').then(response => {
                     console.log(response)
-                    http.post('http://localhost:8000/login', this.formData).then(res => {
+                    http.post('/login', this.formData).then(res => {
                         this.$router.push({ name: 'mainComponent' })
                     }).catch(err => {
                         this.logErrors = err.response.data.errors
@@ -76,13 +75,11 @@
                 })
             },
             registerUser () {
-                http.get('http://localhost:8000/sanctum/csrf-cookie').then(res => {
-                    http.post('http://localhost:8000/register', this.registerForm).then(res => {
+                    http.post('/register', this.registerForm).then(res => {
                         this.$router.push({ name: 'mainComponent' })
                     }).catch(err => {
                         this.regErrors = err.response.data.errors
                     })
-                })
             },
             switcherlog () {
                 if (this.logActive !== true) {
@@ -143,6 +140,5 @@
         justify-content: center;
         height: 100vh;
         grid-row-gap: 20px;
-        grid-template-columns: 20%;
     }
 </style>

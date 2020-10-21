@@ -18,7 +18,7 @@ export const router = new VueRouter({
             name: 'mainComponent',
             component: MainComponent,
             beforeEnter: (to, from, next) => {
-                axios.get('http://localhost:8000/api/user').then(res => {
+                axios.get('/api/user').then(res => {
                     if (res.data[1]) {
                         next()
                     }

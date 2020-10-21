@@ -14,7 +14,7 @@
             <div class="add-btn-block">
                 <b-button @click="addtip=true" variant="success">Добавить</b-button>
             </div>
-            <div>
+            <div class="sign-out-block">
                 <button class="sign-out-btn con-button" @click="logout"><font-awesome-icon style="font-size: 25" :icon="['fas','sign-out-alt']" />выйти</button>
             </div>
         </div>
@@ -40,7 +40,6 @@
 <script>
     import axios from 'axios'
     const http = axios.create({
-        baseURL: 'http://localhost:8000',
         withCredentials: true
     })
     export default {
@@ -70,7 +69,7 @@
         },
         methods: {
             getuserdata () {
-                http.get('http://localhost:8000/api/user', { withCredentials: true }).then(res => {
+                http.get('/api/user', { withCredentials: true }).then(res => {
                     this.Tips = res.data[0]
                 })
             },
@@ -148,7 +147,7 @@
         margin-bottom: 30px;
         margin-top: 30px;
         display: grid;
-        grid-template-columns: 90% 10%;
+        grid-template-columns: 50% 50%;
     }
     .tips-textarea
     {
@@ -160,7 +159,7 @@
     }
     .add-btn-block
     {
-        justify-self: center;
+        justify-self: end;
     }
     .con-button
     {
@@ -181,6 +180,11 @@
     .add-whole-block
     {
         display: grid;
+    }
+    .sign-out-block
+    {
+        justify-self: end;
+        padding-left: 50px;
     }
     @media screen and (max-width: 960px) {
         .Tips {
