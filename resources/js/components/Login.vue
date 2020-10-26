@@ -10,7 +10,7 @@
                     <b-alert variant="danger" show >{{error[0]}}</b-alert>
                 </div>
             </h6>
-            <form @submit="getuser" style="display: grid">
+            <form @submit.prevent="getuser" style="display: grid">
                 <b-form-input class="mb-4" v-model="formData.email" placeholder="Email" required></b-form-input>
                 <b-form-input class="mb-4" v-model="formData.password" type="password" placeholder="Пароль" required></b-form-input>
                 <b-button variant="success" type="submit" style="justify-self: center">Вход</b-button>
@@ -22,7 +22,7 @@
                     <b-alert variant="danger" show >{{error[0]}}</b-alert>
                 </div>
             </h6>
-            <form @submit="registerUser" style="display: grid">
+            <form @submit.prevent="registerUser" style="display: grid">
                 <b-form-input class="mb-4" type="text" v-model="registerForm.name" placeholder="логин" required></b-form-input>
                 <b-form-input class="mb-4" type="email" v-model="registerForm.email" placeholder="email" required></b-form-input>
                 <b-form-input class="mb-4" type="password" v-model="registerForm.password" placeholder="пароль" required></b-form-input>
@@ -66,7 +66,6 @@
         methods: {
             getuser () {
                 http.get('/sanctum/csrf-cookie').then(response => {
-                    console.log(response)
                     http.post('/login', this.formData).then(res => {
                         this.$router.push({ name: 'mainComponent' })
                     }).catch(err => {
